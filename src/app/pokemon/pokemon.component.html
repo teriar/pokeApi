@@ -1,0 +1,21 @@
+<div class="d-flex  mt-2 ">
+
+    <div class="card d-flex" style="width: 35rem;">
+        <img class="card-img-top" src="{{pokemon?.sprites.front_default}}" alt="">
+        <div class="card-body">
+            <h5 class="card-title"></h5>
+            <ul class="list-group list-group-horizontal  justify-content-center">
+                <li class="list-group-item">Habilidades:</li>
+                <li *ngFor=" let i = index let habilidad of pokemon.abilities" class="list-group-item">{{habilidad.ability.name}}</li>
+                </ul>
+
+                <ul class="list-group list-group  justify-content-center mt-2">
+                    <li class="list-group-item">Estadisticas:</li>
+                    <li *ngFor=" let i = index let stat of pokemon.stats" class="list-group-item">{{stat.stat.name}}: {{stat.base_stat}}</li>
+                    </ul>
+            
+            <a href="#" (click)="enviarPokemonFavorito(pokemon)" class="btn btn-primary mt-3">Marcar como favorito</a>
+        </div>
+    </div>
+</div>
+    

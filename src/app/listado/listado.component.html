@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-6">
+     <app-buscador
+     (onEnter)="buscar($event)"
+       (onDebounce)="sugerencias($event)"
+       placeholder="Buscar por pokemon"></app-buscador>
+       
+       <ul class="list-group">
+        <li 
+        *ngFor="let pokemon of arrPokemonesSugeridos"
+        class="list-group-item list group-item-action">
+        <a class="link-info" (click)="obtenerEnlacePokemon(pokemon.url)"
+         >
+         {{pokemon.name}}</a></li>
+      </ul>
+    </div>
+
+    <div  *ngIf="pokemonFavorito" class="col text-center inline " >
+      <div class="row">
+        <div class="col">
+
+          <h2>Pokemon favorito</h2> 
+          <img src="{{pokemonFavorito?.sprites.front_default}}" alt="{{pokemonFavorito.forms[0].name}}">
+        </div>
+        <div class="col">
+          
+          <h2>
+
+            {{pokemonFavorito.forms[0].name}}
+          </h2>
+          <p>habilidades: </p>
+          <ul class="list-group list-group-horizontal  justify-content-center">
+          <li *ngFor=" let i = index let habilidad of pokemonFavorito.abilities" class="list-group-item">{{habilidad.ability.name}}</li>
+          </ul>
+        </div>
+          <div class="col">
+
+            <p class="mt-2">estadisticas: </p>
+            <ul class="list-group list-group-horizontal  justify-content-center">
+              <li *ngFor=" let i = index let stat of pokemonFavorito.stats" class="list-group-item">{{stat.stat.name}}: {{stat.base_stat}}</li>
+              
+            </ul>
+          </div>
+      </div>
+       
+      </div>
+</div>
+
+
+
+
+<div class="row" >
+  <div class="col">
+    
+      <app-tabla class="p-3 mr-5" [arrPokemones]="arrPokemones" (pokemonElegido)="obtenerEnlacePokemon($event)"></app-tabla>
+  </div>
+  <div class="col-3"></div>
+
+  <div *ngIf="pokemon"  class="col p-3"><app-pokemon [pokemon]="pokemon"></app-pokemon></div>
+</div>
+
+
+<div class="   mt-5">
+  <div style="width: 70%">
+    <table
+      class="table table-bordered table-striped table-hover align-middle mb-5 bg-white"
+    >
+      <thead class="bg-light">
+        <tr>
+          <th scope="col">Letra</th>
+          <th scope="col">Total
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let pokeCount of sortedMap | keyvalue">
+        <tr class="">
+          <td>
+            <div class="d-flex align-items-center p-2">
+              <div class="ms-3">
+                <p class="fw-bold mb-1">
+                  {{ pokeCount.key }}
+                </p>
+              </div>
+            </div>
+          </td>
+          <td>
+            {{ pokeCount.value }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

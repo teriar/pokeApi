@@ -1,0 +1,25 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Pokemon</th>
+        
+        <th scope="col">ver</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i = index let pokemon of arrPokemones.results  | paginate: { itemsPerPage: 10, currentPage: page }" >
+        <td>{{i+1}}</td>
+        <td>{{pokemon.name}}</td>
+       
+        <td><a (click)="enviarPokemon(pokemon.url)" href="#">ver</a> </td>
+       
+
+    </tbody>
+  </table>
+
+  <pagination-controls (pageChange)="page = $event" 
+ previousLabel="Anterior"
+  nextLabel="Siguiente"></pagination-controls>
+  
